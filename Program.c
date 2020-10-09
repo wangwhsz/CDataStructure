@@ -41,9 +41,12 @@ int ListInsert_Sq(SqList *L,int i,int elem){
         L->listsize += INCREASEMENT;
         L->elem = newbase;
     }
-    for(count=L -> length  ;  count >=  L.elem+i ; --){
-        L->elem+ = L->elem+-1;
+    for(;L->elem+count<L->length;count++){
+        
     }
+}
+int ListDelete_Sq(SqList *L,int i,int * num){
+
 }
 
 
