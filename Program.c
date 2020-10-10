@@ -73,16 +73,32 @@ int ListInsert_Sq(SqList *L,int i,int elem){
         *(p + 1) = *p;
     }
     *q = elem;
+    printf("\ninsertLength%d\n",L->length);
     L->length++;
 }
 int ListDelete_Sq(SqList *L,int i,int * num){
-
+    if(i<1||i>L->length){
+        return ERROR;
+    }
+    //p指向被删除的元素
+    int * p ;
+    p = L->elem+i-1;
+    *num = *p;
+    //q指向顺序表尾
+    int *q;
+    q = L->elem+L->length-1;
+    for(++p;p<=q;p++){
+        *(p-1) = *p;
+    }
+    // printf("\ndelLength%d\n",L->length);
+    L->length--;
+    return OK;
 }
 //顺序表的输出
 int SqlistOpt(SqList *L){
     int count = 0;
     int nNewLine = 0;
-    for(count = 0;count < L->length-1;count++){
+    for(count = 0;count < L->length;count++){
         printf("%d\t",*(L->elem+count));
         nNewLine++;
         if(nNewLine % 10==0  )
@@ -94,9 +110,13 @@ int SqlistOpt(SqList *L){
 
 int main(){
     SqList L;
+    int num;
+    int *pter = &num;
     InitList_Sq(&L);
     ListElemInit(&L);
     ListInsert_Sq(&L,5,90);
+    ListDelete_Sq(&L,3,pter);
     SqlistOpt(&L);
+    // printf("length%d",L.length);
     getchar();
 }
