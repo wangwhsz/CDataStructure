@@ -16,7 +16,7 @@ typedef struct SqList{
 
 //顺序表的初始化
 int InitList_Sq(SqList *L){
-    L->elem = (int)malloc(INITSIZE*sizeof(int));
+    L->elem = (int*)malloc(INITSIZE*sizeof(int));
     if(!L->elem){
         exit(OVERFLOW);
     }
@@ -50,7 +50,7 @@ int ListInsert_Sq(SqList *L,int i,int elem){
     }
     //顺序表空间不足，重新分配
     if(L->length >= L->listsize){
-        newbase = (int)realloc(L->elem,(INITSIZE+INCREASEMENT)*sizeof(int));
+        newbase = (int*)realloc(L->elem,(INITSIZE+INCREASEMENT)*sizeof(int));
         if(!newbase){
             return ERROR;
         }
@@ -76,6 +76,7 @@ int ListInsert_Sq(SqList *L,int i,int elem){
     printf("\ninsertLength%d\n",L->length);
     L->length++;
 }
+//从顺序表中删除指定位置的元素
 int ListDelete_Sq(SqList *L,int i,int * num){
     if(i<1||i>L->length){
         return ERROR;
